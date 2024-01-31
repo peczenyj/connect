@@ -194,6 +194,7 @@ require (
 	github.com/eapache/queue v1.1.0 // indirect
 	github.com/felixge/httpsnoop v1.0.3 // indirect
 	github.com/form3tech-oss/jwt-go v3.2.5+incompatible // indirect
+	github.com/frankban/quicktest v1.11.3 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
 	github.com/go-faster/city v1.0.1 // indirect
 	github.com/go-faster/errors v0.6.1 // indirect
@@ -255,7 +256,7 @@ require (
 	github.com/olekukonko/tablewriter v0.0.5 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.1.0-rc4 // indirect
-	github.com/opencontainers/runc v1.1.5 // indirect
+	github.com/opencontainers/runc v1.1.12 // indirect
 	github.com/oschwald/maxminddb-golang v1.11.0 // indirect
 	github.com/paulmach/orb v0.10.0 // indirect
 	github.com/pierrec/lz4 v2.6.1+incompatible // indirect
