@@ -95,8 +95,8 @@ require (
 	github.com/matoous/go-nanoid/v2 v2.1.0
 	github.com/microcosm-cc/bluemonday v1.0.27
 	github.com/microsoft/gocosmos v1.1.1
-	github.com/nats-io/nats.go v1.37.0
-	github.com/nats-io/nkeys v0.4.7
+	github.com/nats-io/nats.go v1.39.1
+	github.com/nats-io/nkeys v0.4.10
 	github.com/nats-io/stan.go v0.10.4
 	github.com/neo4j/neo4j-go-driver/v5 v5.24.0
 	github.com/nsf/jsondiff v0.0.0-20210926074059-1e845ec5d249
@@ -392,7 +392,7 @@ require (
 	github.com/moby/term v0.5.0 // indirect
 	github.com/morikuni/aec v1.0.0 // indirect
 	github.com/mtibben/percent v0.2.1 // indirect
-	github.com/nats-io/nats-server/v2 v2.9.23 // indirect
+	github.com/nats-io/nats-server/v2 v2.10.27 // indirect
 	github.com/nats-io/nats-streaming-server v0.24.6 // indirect
 	github.com/nats-io/nuid v1.0.1 // indirect
 	github.com/ncruces/go-strftime v0.1.9 // indirect
