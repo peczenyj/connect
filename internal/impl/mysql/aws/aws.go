@@ -24,11 +24,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 	"github.com/aws/aws-sdk-go-v2/feature/rds/auth"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
-	"github.com/jackc/pgx/v5/pgconn"
+	"github.com/go-sql-driver/mysql"
 
 	"github.com/redpanda-data/benthos/v4/public/service"
 
-	pgstream "github.com/redpanda-data/connect/v4/internal/impl/postgresql"
+	mysqlimpl "github.com/redpanda-data/connect/v4/internal/impl/mysql"
 )
 
 type roleConfig struct {
@@ -37,11 +37,11 @@ type roleConfig struct {
 }
 
 func init() {
-	pgstream.AWSOptFn = awsIAMAuth
+	mysqlimpl.AWSOptFn = awsIAMAuth
 }
 
-func awsIAMAuth(ctx context.Context, awsConf *service.ParsedConfig, dbConf *pgconn.Config, log *service.Logger) (pgstream.TokenBuilder, error) {
-	if enabled, _ := awsConf.FieldBool(pgstream.FieldAWSIAMAuthEnabled); !enabled {
+func awsIAMAuth(ctx context.Context, awsConf *service.ParsedConfig, dbConf *mysql.Config, log *service.Logger) (mysqlimpl.TokenBuilder, error) {
+	if enabled, _ := awsConf.FieldBool(mysqlimpl.FieldAWSIAMAuthEnabled); !enabled {
 		return nil, nil
 	}
 
@@ -54,6 +54,9 @@ func awsIAMAuth(ctx context.Context, awsConf *service.ParsedConfig, dbConf *pgco
 
 		opts []func(*awsconfig.LoadOptions) error
 	)
+	if awsCfg, err = awsconfig.LoadDefaultConfig(ctx); err != nil {
+		return nil, fmt.Errorf("unable to load AWS config: %w", err)
+	}
 	if endpoint, err = awsConf.FieldString("endpoint"); err != nil {
 		return nil, err
 	}
@@ -110,7 +113,8 @@ func awsIAMAuth(ctx context.Context, awsConf *service.ParsedConfig, dbConf *pgco
 		if err != nil {
 			return fmt.Errorf("building IAM auth token: %w", err)
 		}
-		dbConf.Password = password
+		// feels racy, can we return the password from the token builder to be safe?
+		dbConf.Passwd = password
 
 		log.Debug("IAM authentication token generated successfully")
 		return nil
